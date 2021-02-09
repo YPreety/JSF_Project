@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>JSF Form Validation</title>
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+
+	<style type="text/css">
+.btnWidth {
+	width: 80px;
+}
+</style>
+	<style>
+.form-error {
+	color: red
+}
+</style>
+
+</h:head>
+
+<h:body>
+	<h:form id="createStudentForm" class="form-horizontal">
+		<h2>Form Validation</h2>
+		<div>
+			<div style="border-style: double; width: 822px;">
+				<div style="margin-top: 20px;">
+				
+					<table>
+						<tr>
+							<td><h:outputLabel for="name" class="control-label">Name*:</h:outputLabel></td>
+							<td><h:inputText id="name-id" value="#{studentBean.name}"
+									class="form-control" required="true" validatorMessage="name is required">
+								</h:inputText><h:message for="name-id" style="color: red"/></td>
+						</tr>
+
+						<tr>
+							<td><h:outputLabel for="userName" class="control-label">User Name*:</h:outputLabel></td>
+							<td><h:inputText id="userName-id" value="#{studentBean.userName}" 
+							    class="form-control" required="true" validatorMessage="User name is required">
+								</h:inputText><h:message for="userName-id" style="color: red"/></td>
+						</tr>
+
+
+						<tr>
+							<td><h:outputLabel for="password" class="control-label ">Password*:</h:outputLabel></td>
+							<td><h:inputSecret id="password" binding="#{passwordComponent}"
+									value="#{studentBean.password}" class="form-control" size="20"
+									label="Password" required="true" validatorMessage="Password is required">
+								</h:inputSecret><h:message for="password" style="color: red"/></td>
+						</tr>
+
+						<tr>
+							<td><h:outputLabel for="confirmPassword"
+									class="control-label">Re-type Password*:</h:outputLabel></td>
+							<td><h:inputSecret id="confirmPassword" class="form-control" required="#{not empty passwordComponent.value}"
+							        validator="#{studentBean.validatePassword}"
+									size="20" validatorMessage="Password and Confirm Password Should match : Enter Confirm Password">
+									 <f:attribute name="passwordComponent" value="#{passwordComponent}" />
+								</h:inputSecret><h:message for="confirmPassword" style="color: red"/></td>
+						</tr>
+
+						<tr>
+							<td><h:outputLabel for="gender" class="control-label">Gender*:</h:outputLabel></td>
+							<td><h:selectOneRadio id="gender-id"
+									value="#{studentBean.gender}" required="true"
+									validatorMessage="Gender is required">
+									<f:selectItem itemValue="M" itemLabel="&#160; Male &#160;" />
+									<f:selectItem itemValue="F" itemLabel="&#160; Female &#160;" />
+									<f:selectItem itemValue="O" itemLabel="&#160; Other" />
+								</h:selectOneRadio><h:message for="gender-id" style="color: red"/></td>
+						</tr>
+
+						<tr>
+							<td><h:outputLabel for="programmingSkill"
+									class="control-label">Programming Skills*:</h:outputLabel></td>
+							<td><h:selectManyCheckbox id="programmingSkill-id"
+									value="#{studentBean.programmingSkill}" required="true"
+									validatorMessage="Programming Skill is required">
+									<f:selectItem itemValue="Java" itemLabel="&#160; Java &#160;" />
+									<f:selectItem itemValue="Andriod"
+										itemLabel="&#160; Andriod &#160;" />
+									<f:selectItem itemValue="Ruby" itemLabel="&#160; Ruby &#160;" />
+									<f:selectItem itemValue=".Net" itemLabel="&#160; .Net" />
+								</h:selectManyCheckbox><h:message for="programmingSkill-id" style="color: red"/></td>
+						</tr>
+
+
+						<tr>
+							<td><h:outputLabel for="contactNumber" class="control-label">Contact Number*:</h:outputLabel></td>
+							<td><h:inputText id="contactNumber-id"
+									value="#{studentBean.contactNumber}" class="form-control"
+									required="true" validatorMessage="Contact Number is required"
+									maxlength="10">
+								</h:inputText><h:message for="contactNumber-id" style="color: red"/></td>
+						</tr>
+
+						<tr>
+							<td><h:outputLabel for="email" class="control-label">Email*:</h:outputLabel></td>
+							<td><h:inputText id="email-id" value="#{studentBean.email}"
+									class="form-control" size="40" label="email" required="true"
+									requiredMessage="Please enter your email address."
+									validatorMessage="Invalid email format">
+									<f:validateRegex
+										pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+								</h:inputText><h:message for="email-id" style="color: red"/></td>
+						</tr>
+
+
+						<tr>
+							<td><h:outputLabel for="college" class="control-label">College*:</h:outputLabel></td>
+							<td><h:selectOneMenu id="college-id"
+									value="#{studentBean.college}" required="true"
+									validatorMessage="College Name is required"
+									class="form-control">
+									<f:selectItem itemLabel="Select College" />
+									<f:selectItem itemValue="CMR Group of Institutions"
+										itemLabel="CMR Group of Institutions" />
+									<f:selectItem itemValue="Dairy Science College"
+										itemLabel="Dairy Science College" />
+									<f:selectItem itemValue="Bangalore Technological Institute"
+										itemLabel="Bangalore Technological Institute" />
+									<f:selectItem itemValue="Jyothy Institute Of Technology"
+										itemLabel="Jyothy Institute Of Technology" />
+									<f:selectItem itemValue="ACS College Of Engineering"
+										itemLabel="ACS College Of Engineering" />
+									<f:selectItem
+										itemValue="Vijaya Vittala Institute Of Technology"
+										itemLabel="Vijaya Vittala Institute Of Technology" />
+									<f:selectItem itemValue="Sai Vidya Institute Of Technology"
+										itemLabel="Sai Vidya Institute Of Technology" />
+									<f:selectItem
+										itemValue="Yellamma Dasappa Institute Of Technology"
+										itemLabel="Yellamma Dasappa Institute Of Technology" />
+									<f:selectItem itemValue="Sapthagiri College Of Engineering"
+										itemLabel="Sapthagiri College Of Engineering" />
+									<f:selectItem itemValue="KNS Institute Of Technology"
+										itemLabel="KNS Institute Of Technology" />
+									<f:selectItem
+										itemValue="Gopalan College Of Engineering and Management"
+										itemLabel="Gopalan College Of Engineering and Management" />
+								</h:selectOneMenu><h:message for="college-id" style="color: red"/></td>
+						</tr>
+					</table>
+
+
+					<br></br> <br></br>
+					<div class="form-group">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-2" style="width: 60px;">
+							<h:commandButton value="Submit"
+								action="#{studentBean.saveStudentDetails(studentBean)}"
+								class="btn btn-success btnWidth" />
+						</div>
+						<div class="col-sm-1"></div>
+						<div class="col-sm-2">
+							<h:link outcome="studentsList" value="View Record List"
+								class="btn btn-primary" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</h:form>
+</h:body>
+</html>
